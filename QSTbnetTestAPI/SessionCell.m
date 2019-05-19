@@ -82,14 +82,13 @@
      ];
 }
 
-- (void)configureCellWith:(NSDictionary*)dictionary
+- (void)configureCellWith:(NSArray*)array
 {
-    NSLog(@"%@", dictionary);
-    NSString *sessionID = [dictionary valueForKey:@"id"];
-    NSDate *createDate = [dictionary valueForKey:@"creatingDate"];
-    NSNumber *entriesCount = [dictionary valueForKey:@"entriesCount"];
+    NSString *sessionID = [array valueForKey:@"id"];
+    NSDate *createDate = [array valueForKey:@"creatingDate"];
+    NSNumber *entriesCount = [array valueForKey:@"entriesCount"];
     
-    self.sessionIDLabel.text = sessionID;
+    self.sessionIDLabel.text = [NSString stringWithFormat:@"ID: %@", sessionID];
     self.createDateLabel.text = [NSString stringWithFormat:@"Created at:\n%@",[self.dateFormatter stringFromDate:createDate]];
     self.entriesCountLabel.text  =  [NSString stringWithFormat:@"Entries count:%@", entriesCount];
     

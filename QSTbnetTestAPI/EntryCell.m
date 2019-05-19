@@ -101,6 +101,6 @@
     {
         self.editDateLabel.hidden = YES;
     }
-
 }
+
 @end

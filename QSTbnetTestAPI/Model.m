@@ -13,7 +13,6 @@
 
 @property(nonatomic, strong) NWService *nwService;
 @property(nonatomic, strong) CDService *cdService;
-@property(nonatomic, strong) NSString *sessionID;
 @property(nonatomic, strong) NSString *noteText;
 
 @end

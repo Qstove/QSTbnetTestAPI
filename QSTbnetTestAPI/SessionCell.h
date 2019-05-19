@@ -11,7 +11,7 @@
 
 @interface SessionCell : UITableViewCell
 
-- (void)configureCellWith:(NSArray*)dictionary;
+- (void)configureCellWith:(NSArray*)array;
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 
 @end

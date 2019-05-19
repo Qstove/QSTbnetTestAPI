@@ -17,6 +17,7 @@
 @property(nonatomic, weak) id <OutputModelProtocol> delegate;
 @property(nonatomic, copy) NSArray <NSDictionary *> *notesArray;
 @property(nonatomic, copy) NSArray <NSArray *> *sessionArray;
+@property(nonatomic, strong) NSString *sessionID;
 
 + (instancetype) sharedInstance;
 + (instancetype) alloc __attribute__((unavailable("alloc not available, call sharedInstance instead")));

@@ -15,8 +15,10 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UILabel *noSessionsLabel;
 @property (nonatomic, strong) UIBarButtonItem *cleanCoreDataButton;
+@property (nonatomic, strong) UIBarButtonItem *startNewSession;
 @property (nonatomic, strong) Model *model;
 @property (nonatomic, strong) SessionCell *selectedCell;
+
 
 @end
 
@@ -38,8 +40,10 @@
 -(void)createUI
 {
     self.cleanCoreDataButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(cleanCoreDataButtonPushed)];
-    self.navigationController.navigationBar.topItem.rightBarButtonItem = self.cleanCoreDataButton;
-    
+    self.startNewSession = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newSession)];
+    self.navigationController.navigationBar.topItem.rightBarButtonItem = self.startNewSession;
+    self.navigationController.navigationBar.topItem.leftBarButtonItem = self.cleanCoreDataButton;
+
     self.view.backgroundColor = UIColor.whiteColor;
     self.navigationController.navigationBar.topItem.title = @"Session list";
     self.noSessionsLabel = [[UILabel alloc]initWithFrame:self.view.frame];
@@ -66,6 +70,10 @@
     SessionCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SessionCell class]) forIndexPath:indexPath];
     NSArray* array = [self.model.sessionArray objectAtIndex:indexPath.row];
     [cell configureCellWith:array];
+    if([array valueForKey:@"id"] == [self.model getSessionID])
+    {
+        [self selectCell:cell];
+    }
     cell.backgroundColor = UIColor.clearColor;
     return cell;
 }
@@ -81,6 +89,13 @@
     return self.model.sessionArray.count;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self unSelectCell];
+    self.model.sessionID = [[self.model.sessionArray objectAtIndex:indexPath.row] valueForKey:@"id"];
+    [self.tableView reloadData];
+}
+
 
 -(void)cleanCoreDataButtonPushed
 {
@@ -91,5 +106,22 @@
 
 }
 
+-(void)selectCell:(SessionCell*)cell
+{
+    cell.layer.borderWidth = 3.0;
+    //cell.layer.borderColor = UIColor.blackColor.CGColor;
+    self.selectedCell = cell;
+}
+-(void)unSelectCell
+{
+    self.selectedCell.layer.borderWidth = 0.0;
+    //self.selectedCell.layer.borderColor = UIColor.blackColor.CGColor;
+    self.selectedCell = nil;
+}
 
+
+- (void)newSession
+{
+    [self.model startSession];
+}
 @end
