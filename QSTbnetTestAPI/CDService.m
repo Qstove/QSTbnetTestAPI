@@ -8,12 +8,14 @@
 
 #import "CDService.h"
 
+
 @interface CDService ()
 
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 
 @end
+
 
 @implementation CDService
 

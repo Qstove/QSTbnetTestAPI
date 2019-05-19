@@ -12,6 +12,7 @@
 #import "EntryCell.h"
 #import "FullEntryViewController.h"
 
+
 @interface ViewController ()
 
 @property (nonatomic, strong) Model *model;
@@ -26,6 +27,7 @@
 
 @end
 
+
 @implementation ViewController
 
 - (void)viewDidLoad
@@ -36,7 +38,7 @@
     self.model.delegate = self;
 }
 
--(void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     if([self.model getSessionID])
     {
@@ -45,7 +47,7 @@
 }
 
 #pragma mark - Creating UI
--(void)createUI
+- (void)createUI
 {
     self.view.backgroundColor = UIColor.whiteColor;
     self.addEntryButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addEntryButtonPushed)];
@@ -74,7 +76,6 @@
     self.loadingSpinner.center = self.view.center;
     [self.view addSubview:self.loadingSpinner];
     
-    
     self.networkErrorAlert = [UIAlertController alertControllerWithTitle:@"Check internet connection!"
                                                                 message:@"Check your internet connection and try again!"
                                                          preferredStyle:UIAlertControllerStyleAlert];
@@ -96,16 +97,14 @@
     [self.networkErrorAlert addAction:refreshAction];
 }
 
-
-
-#pragma mark - Navigation buttons
--(void)addEntryButtonPushed
+#pragma mark - navigationItemActions
+- (void)addEntryButtonPushed
 {
     self.addEntryViewController = [AddEntryViewController new];
     [self.navigationController pushViewController:self.addEntryViewController animated:YES];
 }
 
--(void)refreshButtonPushed
+- (void)refreshButtonPushed
 {
     [UIView animateWithDuration:0.5 animations:^{
         self.view.backgroundColor = [UIColor colorWithRed:169.0/255.0 green:169.0/255.0 blue:169.0/255.0 alpha:1];
@@ -114,7 +113,6 @@
     [self.model refreshData];
 }
 
-
 #pragma mark - tableView delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -122,6 +120,11 @@
     {
         [self.tableView setHidden:NO];
         [self.noEntriesLabel setHidden:YES];
+    }
+    else if(self.model.notesArray.count == 0)
+    {
+        [self.tableView setHidden:YES];
+        [self.noEntriesLabel setHidden:NO];
     }
     return self.model.notesArray.count;
 }
@@ -142,7 +145,6 @@
     [self.navigationController pushViewController:self.fullEntryViewController animated:YES];
 }
 
-
 #pragma mark - Model Delegate
 - (void)modelDidRefreshed;
 {
@@ -155,12 +157,10 @@
 
 - (void)NWServiceError
 {
-
     if(!self.presentedViewController)
     {
         [self presentViewController:self.networkErrorAlert animated:YES completion:nil];
     }
 }
-
 
 @end

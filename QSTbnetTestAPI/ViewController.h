@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ModelProtocol.h"
 
-@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, OutputModelProtocol>
 
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, OutputModelProtocol>
 
 @end
 

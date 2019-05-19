@@ -10,7 +10,6 @@
 #import "NWServiceProtocol.h"
 
 
-
 @interface NWService : NSObject
 
 @property (nonatomic, weak) id <NWServiceProtocol> delegate;

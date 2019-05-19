@@ -6,7 +6,6 @@
 //  Copyright © 2019 Qstove. All rights reserved.
 //
 
-
 @protocol CDServiceProtocol <NSObject>
 
 - (void)dataDidUpdatedWith:(NSArray <NSDictionary *> *)array;

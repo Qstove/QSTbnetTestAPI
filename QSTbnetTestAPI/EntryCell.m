@@ -8,13 +8,13 @@
 
 #import "EntryCell.h"
 
+
 @interface EntryCell ()
 
 @property (nonatomic, strong) UILabel *entryLabel;
 @property (nonatomic, strong) UILabel *createDateLabel;
 @property (nonatomic, strong) UILabel *editDateLabel;
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
-
 
 @end
 

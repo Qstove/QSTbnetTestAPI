@@ -13,7 +13,6 @@
 @property (nonatomic, strong) UILabel *sessionIDLabel;
 @property (nonatomic, strong) UILabel *createDateLabel;
 @property (nonatomic, strong) UILabel *entriesCountLabel;
-
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 
 @end
@@ -21,7 +20,7 @@
 
 @implementation SessionCell
 
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self)
@@ -70,12 +69,12 @@
                                               [self.sessionIDLabel.widthAnchor constraintEqualToConstant:CGRectGetWidth(self.contentView.bounds)*0.8],
                                               
                                               [self.createDateLabel.leadingAnchor constraintEqualToAnchor:self.sessionIDLabel.trailingAnchor constant:2.5],
-                                              [self.createDateLabel.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-2.5],
+                                              [self.createDateLabel.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-5],
                                               [self.createDateLabel.topAnchor constraintEqualToAnchor:self.contentView.topAnchor constant:2.5],
                                               [self.createDateLabel.bottomAnchor constraintEqualToAnchor:self.contentView.centerYAnchor],
                                               
                                               [self.entriesCountLabel.leadingAnchor constraintEqualToAnchor:self.sessionIDLabel.trailingAnchor constant:2.5],
-                                              [self.entriesCountLabel.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-2.5],
+                                              [self.entriesCountLabel.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-5],
                                               [self.entriesCountLabel.topAnchor constraintEqualToAnchor:self.createDateLabel.bottomAnchor],
                                               [self.entriesCountLabel.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor constant:-2.5]
                                               ]

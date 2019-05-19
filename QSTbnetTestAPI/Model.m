@@ -17,9 +17,10 @@
 
 @end
 
+
 @implementation Model
 
-+(instancetype) sharedInstance {
++ (instancetype) sharedInstance {
     static dispatch_once_t pred;
     static id shared = nil;
     dispatch_once(&pred, ^{
@@ -28,7 +29,7 @@
     return shared;
 }
 
--(instancetype) initUniqueInstance {
+- (instancetype) initUniqueInstance {
     _nwService = [NWService sharedInstance];
     _cdService = [CDService sharedInstance];
     _nwService.delegate = self;
@@ -48,7 +49,7 @@
     [self.nwService okLets:REFRESH];
 }
 
--(void)NWConnectionFailure
+- (void)NWConnectionFailure
 {
     dispatch_sync(dispatch_get_main_queue(), ^{
         [self.delegate NWServiceError];
@@ -66,7 +67,7 @@
     [self.nwService okLets:CREATE];
 }
 
--(void)cleanCoreData
+- (void)cleanCoreData
 {
     [self.cdService deleteAll];
 }

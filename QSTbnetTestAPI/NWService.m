@@ -18,7 +18,9 @@
 
 @implementation NWService
 
-+(instancetype) sharedInstance {
+#pragma mark - init
++ (instancetype) sharedInstance
+{
     static dispatch_once_t pred;
     static id shared = nil;
     dispatch_once(&pred, ^{
@@ -27,12 +29,12 @@
     return shared;
 }
 
--(instancetype) initUniqueInstance {
+- (instancetype) initUniqueInstance
+{
     return [super init];
 }
 
-
--(void)okLets:(NWRequestType)type
+- (void)okLets:(NWRequestType)type
 {
 #pragma mark - CompletionHandlers
     void(^startCompletionHandler)(NSData *, NSURLResponse * , NSError * )=^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error){
@@ -81,8 +83,6 @@
         }
         else
         {
-            NSDictionary *temp = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-            NSLog(@"%@", temp);
             [self.session finishTasksAndInvalidate];
         }
     };

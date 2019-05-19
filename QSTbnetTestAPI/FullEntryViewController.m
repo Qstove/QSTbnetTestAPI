@@ -8,15 +8,16 @@
 
 #import "FullEntryViewController.h"
 
+
 @interface FullEntryViewController ()
 
 @property (nonatomic, strong) UILabel *createDateLabel;
 @property (nonatomic, strong) UILabel *editDateLabel;
 @property (nonatomic, strong) UITextView *entryBodyTextView;
-
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 
 @end
+
 
 @implementation FullEntryViewController
 
@@ -49,7 +50,6 @@
     self.editDateLabel.font = [UIFont systemFontOfSize:20 weight:0.5];
     [self.view addSubview: self.editDateLabel];
 
-    
     self.entryBodyTextView = [UITextView new];
     self.entryBodyTextView.translatesAutoresizingMaskIntoConstraints = NO;
     self.entryBodyTextView.font = [UIFont systemFontOfSize:25 weight:0.5];
@@ -92,6 +92,6 @@
     if ([editDate floatValue] == [createDate floatValue])
     {
         self.editDateLabel.hidden = YES;
-    }}
-
+    }
+}
 @end

@@ -10,6 +10,7 @@
 #import "Model.h"
 #import "SessionCell.h"
 
+
 @interface SessionListViewController ()
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -19,8 +20,8 @@
 @property (nonatomic, strong) Model *model;
 @property (nonatomic, strong) SessionCell *selectedCell;
 
-
 @end
+
 
 @implementation SessionListViewController
 
@@ -37,13 +38,12 @@
     [self.tableView reloadData];
 }
 
--(void)createUI
+- (void)createUI
 {
     self.cleanCoreDataButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(cleanCoreDataButtonPushed)];
     self.startNewSession = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newSession)];
     self.navigationController.navigationBar.topItem.rightBarButtonItem = self.startNewSession;
     self.navigationController.navigationBar.topItem.leftBarButtonItem = self.cleanCoreDataButton;
-
     self.view.backgroundColor = UIColor.whiteColor;
     self.navigationController.navigationBar.topItem.title = @"Session list";
     self.noSessionsLabel = [[UILabel alloc]initWithFrame:self.view.frame];
@@ -51,9 +51,7 @@
     self.noSessionsLabel.font = [UIFont systemFontOfSize:25];
     self.noSessionsLabel.textAlignment = NSTextAlignmentCenter;
     self.noSessionsLabel.backgroundColor = UIColor.clearColor;
-    
     [self.view addSubview:self.noSessionsLabel];
-    
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style: UITableViewStylePlain];
     [self.tableView registerClass:[SessionCell class] forCellReuseIdentifier:NSStringFromClass([SessionCell class])];
     self.tableView.delegate = self;
@@ -62,7 +60,6 @@
     [self.tableView setHidden:YES];
     [self.view addSubview:self.tableView];
 }
-
 
 #pragma mark - tableview delegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -78,7 +75,6 @@
     return cell;
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if((self.model.sessionArray.count) && (self.tableView.isHidden))
@@ -91,37 +87,38 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self unSelectCell];
+    [self deselectCell];
     self.model.sessionID = [[self.model.sessionArray objectAtIndex:indexPath.row] valueForKey:@"id"];
     [self.tableView reloadData];
 }
 
-
--(void)cleanCoreDataButtonPushed
+#pragma mark - navigationItemActions
+- (void)cleanCoreDataButtonPushed
 {
     [self.model cleanCoreData];
     [self.tableView reloadData];
     [self.tableView setHidden:YES];
     [self.noSessionsLabel setHidden:NO];
-
+    [self.model startSession];
 }
-
--(void)selectCell:(SessionCell*)cell
-{
-    cell.layer.borderWidth = 3.0;
-    //cell.layer.borderColor = UIColor.blackColor.CGColor;
-    self.selectedCell = cell;
-}
--(void)unSelectCell
-{
-    self.selectedCell.layer.borderWidth = 0.0;
-    //self.selectedCell.layer.borderColor = UIColor.blackColor.CGColor;
-    self.selectedCell = nil;
-}
-
 
 - (void)newSession
 {
+    [self deselectCell];
     [self.model startSession];
 }
+
+#pragma mark - select/deselect cell
+- (void)selectCell:(SessionCell*)cell
+{
+    cell.layer.borderWidth = 3.0;
+    self.selectedCell = cell;
+}
+
+-(void)deselectCell
+{
+    self.selectedCell.layer.borderWidth = 0.0;
+    self.selectedCell = nil;
+}
+
 @end

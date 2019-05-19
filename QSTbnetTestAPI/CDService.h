@@ -10,6 +10,7 @@
 #import "CDServiceProtocol.h"
 #import "AppDelegate.h"
 
+
 @interface CDService : NSObject
 
 @property (nonatomic, weak) id <CDServiceProtocol> delegate;

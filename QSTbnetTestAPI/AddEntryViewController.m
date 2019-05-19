@@ -20,6 +20,7 @@
 
 @end
 
+
 @implementation AddEntryViewController
 
 - (void)viewDidLoad
@@ -30,8 +31,7 @@
     _model = [Model sharedInstance];
 }
 
-
--(void)createUI
+- (void)createUI
 {
     self.view.backgroundColor = UIColor.whiteColor;
     _label = [UILabel new];
@@ -62,7 +62,7 @@
     [self.view addSubview:_okButton];
 }
 
--(void)makeConstrains
+- (void)makeConstrains
 {
     [NSLayoutConstraint activateConstraints:@[
                                               [_label.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
@@ -83,11 +83,10 @@
      ];
 }
 
--(void)okButtonPressed
+- (void)okButtonPressed
 {
     [self.model newEntryWith:self.textField.text];
     [self.navigationController popViewControllerAnimated:YES];
 }
-
 
 @end

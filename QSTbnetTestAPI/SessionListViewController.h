@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ModelProtocol.h"
 
+
 @interface SessionListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, OutputModelProtocol>
 
 @end

@@ -14,5 +14,4 @@
 - (void)coreDataDidRefreshed;
 - (void)NWServiceError;
 
-
 @end
