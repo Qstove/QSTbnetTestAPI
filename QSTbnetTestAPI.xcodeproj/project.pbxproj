@@ -14,7 +14,11 @@
 		40029B1222808ABC003434E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 40029B1122808ABC003434E4 /* main.m */; };
 		40620A3D22887B880035519B /* FullEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40620A3C22887B880035519B /* FullEntryViewController.m */; };
 		40796DC6228093B2004F6796 /* NWService.m in Sources */ = {isa = PBXBuildFile; fileRef = 40796DC5228093B2004F6796 /* NWService.m */; };
+		408D584722916D150041DA03 /* SessionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 408D584622916D150041DA03 /* SessionListViewController.m */; };
+		408D584A2291A7460041DA03 /* SessionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 408D58492291A7460041DA03 /* SessionCell.m */; };
 		409902BC22815C980078EB8F /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 409902BB22815C980078EB8F /* Model.m */; };
+		40A9ABEC228E95240000B60B /* QSTbnetTestAPI.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40A9ABEA228E95240000B60B /* QSTbnetTestAPI.xcdatamodeld */; };
+		40A9ABF7228E9A920000B60B /* CDService.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A9ABF6228E9A920000B60B /* CDService.m */; };
 		40AC2D1A2280A18500555894 /* AddEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AC2D192280A18500555894 /* AddEntryViewController.m */; };
 		40AE2EB922823A6E00706149 /* EntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AE2EB822823A6E00706149 /* EntryCell.m */; };
 /* End PBXBuildFile section */
@@ -34,9 +38,17 @@
 		40796DC4228093B2004F6796 /* NWService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NWService.h; sourceTree = "<group>"; };
 		40796DC5228093B2004F6796 /* NWService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NWService.m; sourceTree = "<group>"; };
 		40796DC72280942A004F6796 /* NWServiceProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NWServiceProtocol.h; sourceTree = "<group>"; };
+		408D584522916D150041DA03 /* SessionListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SessionListViewController.h; sourceTree = "<group>"; };
+		408D584622916D150041DA03 /* SessionListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SessionListViewController.m; sourceTree = "<group>"; };
+		408D58482291A7460041DA03 /* SessionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SessionCell.h; sourceTree = "<group>"; };
+		408D58492291A7460041DA03 /* SessionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SessionCell.m; sourceTree = "<group>"; };
 		409902BA22815C980078EB8F /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		409902BB22815C980078EB8F /* Model.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 		409902BD22815CDE0078EB8F /* ModelProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelProtocol.h; sourceTree = "<group>"; };
+		40A9ABEB228E95240000B60B /* QSTbnetTestAPI.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QSTbnetTestAPI.xcdatamodel; sourceTree = "<group>"; };
+		40A9ABF5228E9A920000B60B /* CDService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDService.h; sourceTree = "<group>"; };
+		40A9ABF6228E9A920000B60B /* CDService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDService.m; sourceTree = "<group>"; };
+		40A9ABF8228E9ACC0000B60B /* CDServiceProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDServiceProtocol.h; sourceTree = "<group>"; };
 		40AC2D182280A18500555894 /* AddEntryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddEntryViewController.h; sourceTree = "<group>"; };
 		40AC2D192280A18500555894 /* AddEntryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddEntryViewController.m; sourceTree = "<group>"; };
 		40AE2EB722823A6E00706149 /* EntryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntryCell.h; sourceTree = "<group>"; };
@@ -82,6 +94,7 @@
 				40029B1022808ABC003434E4 /* Info.plist */,
 				40029B1122808ABC003434E4 /* main.m */,
 				40029B0D22808ABC003434E4 /* LaunchScreen.storyboard */,
+				40A9ABEA228E95240000B60B /* QSTbnetTestAPI.xcdatamodeld */,
 			);
 			path = QSTbnetTestAPI;
 			sourceTree = "<group>";
@@ -89,6 +102,7 @@
 		40796DC22280934A004F6796 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				40A9ABED228E97100000B60B /* CoreData */,
 				40796DC322809352004F6796 /* Network */,
 			);
 			name = Services;
@@ -114,6 +128,16 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		40A9ABED228E97100000B60B /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				40A9ABF5228E9A920000B60B /* CDService.h */,
+				40A9ABF6228E9A920000B60B /* CDService.m */,
+				40A9ABF8228E9ACC0000B60B /* CDServiceProtocol.h */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		40AE2EB522823A3400706149 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +148,8 @@
 				40AC2D192280A18500555894 /* AddEntryViewController.m */,
 				40620A3B22887B880035519B /* FullEntryViewController.h */,
 				40620A3C22887B880035519B /* FullEntryViewController.m */,
+				408D584522916D150041DA03 /* SessionListViewController.h */,
+				408D584622916D150041DA03 /* SessionListViewController.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -133,6 +159,8 @@
 			children = (
 				40AE2EB722823A6E00706149 /* EntryCell.h */,
 				40AE2EB822823A6E00706149 /* EntryCell.m */,
+				408D58482291A7460041DA03 /* SessionCell.h */,
+				408D58492291A7460041DA03 /* SessionCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -210,10 +238,14 @@
 				40AE2EB922823A6E00706149 /* EntryCell.m in Sources */,
 				40796DC6228093B2004F6796 /* NWService.m in Sources */,
 				40AC2D1A2280A18500555894 /* AddEntryViewController.m in Sources */,
+				408D584722916D150041DA03 /* SessionListViewController.m in Sources */,
 				40029B0722808ABA003434E4 /* ViewController.m in Sources */,
 				409902BC22815C980078EB8F /* Model.m in Sources */,
 				40029B1222808ABC003434E4 /* main.m in Sources */,
+				408D584A2291A7460041DA03 /* SessionCell.m in Sources */,
 				40029B0422808ABA003434E4 /* AppDelegate.m in Sources */,
+				40A9ABF7228E9A920000B60B /* CDService.m in Sources */,
+				40A9ABEC228E95240000B60B /* QSTbnetTestAPI.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +437,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		40A9ABEA228E95240000B60B /* QSTbnetTestAPI.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				40A9ABEB228E95240000B60B /* QSTbnetTestAPI.xcdatamodel */,
+			);
+			currentVersion = 40A9ABEB228E95240000B60B /* QSTbnetTestAPI.xcdatamodel */;
+			path = QSTbnetTestAPI.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 40029AF722808ABA003434E4 /* Project object */;
 }

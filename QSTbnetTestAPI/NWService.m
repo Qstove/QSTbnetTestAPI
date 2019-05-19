@@ -32,7 +32,7 @@
 }
 
 
--(void)okLets:(RequestType)type
+-(void)okLets:(NWRequestType)type
 {
 #pragma mark - CompletionHandlers
     void(^startCompletionHandler)(NSData *, NSURLResponse * , NSError * )=^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error){
@@ -121,10 +121,12 @@
             
         case DELETE:
             //Coming soon ;)
+            //upd. api dont support :C
             break;
             
         case EDIT:
             //Coming soon ;)
+            //upd. api dont support :C
             break;
     }
     [sessionDataTask resume];

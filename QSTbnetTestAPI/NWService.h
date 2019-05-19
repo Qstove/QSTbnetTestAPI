@@ -13,15 +13,15 @@
 
 @interface NWService : NSObject
 
-@property (nonatomic, weak) id <NWServiceOutputProtocol> delegate; /**< Делегат внешних событий, для обработки процессов загрузки и окончания загрузки*/
+@property (nonatomic, weak) id <NWServiceProtocol> delegate;
 
-+(instancetype) sharedInstance;
-+(instancetype) alloc __attribute__((unavailable("alloc not available, call sharedInstance instead")));
--(instancetype) init __attribute__((unavailable("init not available, call sharedInstance instead")));
-+(instancetype) new __attribute__((unavailable("new not available, call sharedInstance instead")));
--(instancetype) copy __attribute__((unavailable("copy not available, call sharedInstance instead")));
++ (instancetype) sharedInstance;
++ (instancetype) alloc __attribute__((unavailable("alloc not available, call sharedInstance instead")));
+- (instancetype) init __attribute__((unavailable("init not available, call sharedInstance instead")));
++ (instancetype) new __attribute__((unavailable("new not available, call sharedInstance instead")));
+- (instancetype) copy __attribute__((unavailable("copy not available, call sharedInstance instead")));
 
-- (void)okLets:(RequestType)type;
+- (void)okLets:(NWRequestType)type;
 
 @end
 

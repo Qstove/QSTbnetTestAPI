@@ -8,9 +8,11 @@
 
 #import "Model.h"
 
+
 @interface Model ()
 
 @property(nonatomic, strong) NWService *nwService;
+@property(nonatomic, strong) CDService *cdService;
 @property(nonatomic, strong) NSString *sessionID;
 @property(nonatomic, strong) NSString *noteText;
 
@@ -29,8 +31,11 @@
 
 -(instancetype) initUniqueInstance {
     _nwService = [NWService sharedInstance];
+    _cdService = [CDService sharedInstance];
     _nwService.delegate = self;
+    _cdService.delegate = self;
     _notesArray = [NSMutableArray array];
+    _sessionArray = _cdService.results;
     [self startSession];
     return [super init];
 }
@@ -48,7 +53,8 @@
 {
     dispatch_sync(dispatch_get_main_queue(), ^{
         [self.delegate NWServiceError];
-    });}
+    });
+}
 
 - (void)startSession
 {
@@ -61,17 +67,24 @@
     [self.nwService okLets:CREATE];
 }
 
+-(void)cleanCoreData
+{
+    [self.cdService deleteAll];
+}
 
 #pragma mark - NWService delegate
 - (void)sessionDidStarted:(NSString *)sessionID
 {
     self.sessionID = sessionID;
-    NSLog(@"sessionID = %@", self.sessionID);
 }
 
 - (void)refreshDidFinishedWith:(NSArray <NSDictionary *> *)array
 {
     self.notesArray = array;
+    if(array.count)
+    {
+        [self.cdService saveSessionWithID:self.sessionID entriesCount:[NSNumber numberWithInteger:array.count]];
+    }
     dispatch_sync(dispatch_get_main_queue(), ^{
         [self.delegate modelDidRefreshed];
     });
@@ -87,6 +100,10 @@
     return self.noteText;
 }
 
-
+#pragma mark - CDservice delegate
+- (void)dataDidUpdatedWith:(NSArray <NSArray *> *)array
+{
+    self.sessionArray = array;
+}
 
 @end

@@ -6,15 +6,16 @@
 //  Copyright © 2019 Qstove. All rights reserved.
 //
 
-typedef enum : NSUInteger {
+typedef enum : NSUInteger
+{
     START,
     REFRESH,
     CREATE,
     DELETE,
     EDIT
-}RequestType;
+}NWRequestType;
 
-@protocol NWServiceOutputProtocol <NSObject>
+@protocol NWServiceProtocol <NSObject>
 
 - (void)refreshDidFinishedWith:(NSArray <NSArray *> *)array;
 - (void)NWConnectionFailure;

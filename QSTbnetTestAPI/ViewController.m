@@ -15,6 +15,7 @@
 @interface ViewController ()
 
 @property (nonatomic, strong) Model *model;
+@property (nonatomic, strong) UILabel *noEntriesLabel;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIBarButtonItem *addEntryButton;
 @property (nonatomic, strong) UIBarButtonItem *refreshButton;
@@ -31,7 +32,8 @@
 {
     [super viewDidLoad];
     [self createUI];
-    [self preparationsForWork];
+    self.model = [Model sharedInstance];
+    self.model.delegate = self;
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -51,11 +53,21 @@
     self.navigationController.navigationBar.topItem.rightBarButtonItem = self.addEntryButton;
     self.navigationController.navigationBar.topItem.leftBarButtonItem = self.refreshButton;
 
-    self.navigationController.navigationBar.topItem.title = @"List of entries";
+    self.navigationController.navigationBar.topItem.title = @"Entries list";
+    self.noEntriesLabel = [[UILabel alloc]initWithFrame:self.view.frame];
+    self.noEntriesLabel.text = @"No entries";
+    self.noEntriesLabel.font = [UIFont systemFontOfSize:25];
+    self.noEntriesLabel.textAlignment = NSTextAlignmentCenter;
+    self.noEntriesLabel.backgroundColor = UIColor.clearColor;
+
+    [self.view addSubview:self.noEntriesLabel];
+    
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style: UITableViewStylePlain];
     [self.tableView registerClass:[EntryCell class] forCellReuseIdentifier:NSStringFromClass([EntryCell class])];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.backgroundColor = UIColor.clearColor;
+    [self.tableView setHidden:YES];
     [self.view addSubview:self.tableView];
     
     self.loadingSpinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -82,15 +94,9 @@
                                                           }];
     [self.networkErrorAlert addAction:defaultAction];
     [self.networkErrorAlert addAction:refreshAction];
-    
-    
 }
 
--(void)preparationsForWork
-{
-    _model = [Model sharedInstance];
-    self.model.delegate = self;
-}
+
 
 #pragma mark - Navigation buttons
 -(void)addEntryButtonPushed
@@ -102,7 +108,7 @@
 -(void)refreshButtonPushed
 {
     [UIView animateWithDuration:0.5 animations:^{
-        self.tableView.backgroundColor = [UIColor colorWithRed:169.0/255.0 green:169.0/255.0 blue:169.0/255.0 alpha:1];
+        self.view.backgroundColor = [UIColor colorWithRed:169.0/255.0 green:169.0/255.0 blue:169.0/255.0 alpha:1];
     }];
     [self.loadingSpinner startAnimating];
     [self.model refreshData];
@@ -112,6 +118,11 @@
 #pragma mark - tableView delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if((self.model.notesArray.count) && (self.tableView.isHidden))
+    {
+        [self.tableView setHidden:NO];
+        [self.noEntriesLabel setHidden:YES];
+    }
     return self.model.notesArray.count;
 }
 
@@ -120,7 +131,7 @@
     EntryCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([EntryCell class]) forIndexPath:indexPath];
     NSDictionary* dictionary = [self.model.notesArray objectAtIndex:indexPath.row];
     [cell configureCellWith:dictionary];
-    cell.backgroundColor = UIColor.whiteColor;
+    cell.backgroundColor = UIColor.clearColor;
     return cell;
 }
 
@@ -138,7 +149,7 @@
     [self.tableView reloadData];
     [self.loadingSpinner stopAnimating];
     [UIView animateWithDuration:0.5 animations:^{
-        self.tableView.backgroundColor = UIColor.whiteColor;
+        self.view.backgroundColor = UIColor.whiteColor;
     }];
 }
 
