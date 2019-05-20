@@ -46,25 +46,25 @@
     {
         [self startSession];
     }
-    [self.nwService okLets:REFRESH];
+    [self.nwService okLets:NWRequestTypeREFRESH];
 }
 
 - (void)NWConnectionFailure
 {
-    dispatch_sync(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         [self.delegate NWServiceError];
     });
 }
 
 - (void)startSession
 {
-    [self.nwService okLets:START];
+    [self.nwService okLets:NWRequestTypeSTART];
 }
 
 - (void)newEntryWith:(NSString *)text
 {
     self.noteText = text;
-    [self.nwService okLets:CREATE];
+    [self.nwService okLets:NWRequestTypeCREATE];
 }
 
 - (void)cleanCoreData

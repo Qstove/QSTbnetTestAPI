@@ -82,17 +82,17 @@
 
 - (void)configureCellWith:(NSDictionary*)dictionary
 {
-    NSNumber *createDate = [dictionary objectForKey:@"da"];
-    NSNumber *editDate = [dictionary objectForKey:@"dm"];
+    NSNumber *createDate = dictionary[@"da"];
+    NSNumber *editDate = dictionary[@"dm"];
     NSString *entryBody = @"";
-    if(((NSString*)[dictionary objectForKey:@"body"]).length > 200)
+    if(((NSString*)dictionary[@"body"]).length > 200)
     {
-        entryBody = [NSString stringWithFormat:@"%@", [[dictionary objectForKey:@"body"] substringWithRange:NSMakeRange(0,200)]];
+        entryBody = [NSString stringWithFormat:@"%@", [dictionary[@"body"] substringWithRange:NSMakeRange(0,200)]];
         entryBody = [entryBody stringByAppendingString:@" ..."];
     }
     else
     {
-        entryBody = [dictionary objectForKey:@"body"];
+        entryBody = dictionary[@"body"];
     }
     self.entryLabel.text = entryBody;
     self.createDateLabel.text = [NSString stringWithFormat:@"Created at:\n%@",[self.dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:[createDate floatValue]]]];

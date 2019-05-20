@@ -6,14 +6,15 @@
 //  Copyright © 2019 Qstove. All rights reserved.
 //
 
-typedef enum : NSUInteger
+typedef NS_ENUM(NSUInteger, NWRequestType)
 {
-    START,
-    REFRESH,
-    CREATE,
-    DELETE,
-    EDIT
-}NWRequestType;
+    NWRequestTypeSTART,
+    NWRequestTypeREFRESH,
+    NWRequestTypeCREATE,
+    NWRequestTypeDELETE,
+    NWRequestTypeEDIT
+};
+
 
 @protocol NWServiceProtocol <NSObject>
 

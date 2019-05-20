@@ -11,13 +11,13 @@
 
 @interface CDService ()
 
-@property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 
 @end
 
 
 @implementation CDService
+@synthesize persistentContainer = _persistentContainer;
 
 + (instancetype) sharedInstance
 {
@@ -31,8 +31,7 @@
 
 - (instancetype) initUniqueInstance
 {
-    _appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
-    _context = _appDelegate.persistentContainer.viewContext;
+    _context = self.persistentContainer.viewContext;
     return [super init];
 }
 
@@ -47,7 +46,7 @@
             {
                 [session setValue:count forKey:@"entriesCount"];
                 [session setValue:[NSDate date] forKey:@"creatingDate"];
-                [self.appDelegate saveContext];
+                [self saveContext];
                 [self.delegate dataDidUpdatedWith:self.results];
             }
             return;
@@ -57,7 +56,7 @@
     [session setValue:sessionID forKey:@"id"];
     [session setValue:count forKey:@"entriesCount"];
     [session setValue:[NSDate date] forKey:@"creatingDate"];
-    [self.appDelegate saveContext];
+    [self saveContext];
     [self.delegate dataDidUpdatedWith:self.results];
 }
 
@@ -78,7 +77,39 @@
     {
         [self.context deleteObject:object];
     }
-    [self.appDelegate saveContext];
+    [self saveContext];
     [self.delegate dataDidUpdatedWith:self.results];
 }
+
+#pragma mark - Core Data stack
+- (NSPersistentContainer *)persistentContainer
+{
+    @synchronized (self)
+    {
+        if (_persistentContainer == nil) {
+            _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"QSTbnetTestAPI"];
+            [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
+                if (error != nil)
+                {
+                    NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+                    abort();
+                }
+            }];
+        }
+    }
+    return _persistentContainer;
+}
+
+#pragma mark - Core Data Saving support
+- (void)saveContext
+{
+    NSManagedObjectContext *context = self.persistentContainer.viewContext;
+    NSError *error = nil;
+    if ([context hasChanges] && ![context save:&error])
+    {
+        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+        abort();
+    }
+}
+
 @end

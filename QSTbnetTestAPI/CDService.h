@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CDServiceProtocol.h"
-#import "AppDelegate.h"
-
+#import <CoreData/CoreData.h>
 
 @interface CDService : NSObject
 
@@ -22,6 +21,9 @@
 + (instancetype) new __attribute__((unavailable("new not available, call sharedInstance instead")));
 - (instancetype) copy __attribute__((unavailable("copy not available, call sharedInstance instead")));
 
+
+@property (readonly, strong) NSPersistentContainer *persistentContainer;
+- (void)saveContext;
 - (void)saveSessionWithID:(NSString*)sessionID entriesCount:(NSNumber*)count;
 - (void)deleteAll;
 

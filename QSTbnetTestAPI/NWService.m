@@ -61,7 +61,7 @@
         else
         {
             NSDictionary *temp = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-            NSArray *arr = [[temp objectForKey:@"data"] firstObject];
+            NSArray *arr = [temp[@"data"] firstObject];
             NSMutableArray <NSArray *> *finArr = [NSMutableArray array];
             for (NSArray *dictArr in arr)
             {
@@ -98,33 +98,33 @@
     NSData *postData;
 
     switch (type) {
-        case START:
+        case NWRequestTypeSTART:
             postString = [NSString stringWithFormat:@"a=new_session"];
             postData = [postString dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
             [request setHTTPBody:postData];
             sessionDataTask = [self.session dataTaskWithRequest:request completionHandler:startCompletionHandler];
             break;
             
-        case REFRESH:
+        case NWRequestTypeREFRESH:
             postString = [NSString stringWithFormat:@"a=get_entries&session=%@", [self.delegate getSessionID]];
             postData = [postString dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
             [request setHTTPBody:postData];
             sessionDataTask = [self.session dataTaskWithRequest:request completionHandler:refreshCompletionHandler];
             break;
             
-        case CREATE:
+        case NWRequestTypeCREATE:
             postString = [NSString stringWithFormat:@"a=add_entry&session=%@&body=%@", [self.delegate getSessionID], [self.delegate getNoteText]];
             postData = [postString dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
             [request setHTTPBody:postData];
             sessionDataTask = [self.session dataTaskWithRequest:request completionHandler:createCompletionHandler];
             break;
             
-        case DELETE:
+        case NWRequestTypeDELETE:
             //Coming soon ;)
             //upd. api dont support :C
             break;
             
-        case EDIT:
+        case NWRequestTypeEDIT:
             //Coming soon ;)
             //upd. api dont support :C
             break;

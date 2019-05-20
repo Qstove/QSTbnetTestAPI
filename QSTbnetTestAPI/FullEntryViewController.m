@@ -84,9 +84,9 @@
 
 - (void)configureWithDictionary:(NSDictionary *)dictionary
 {
-    NSNumber *createDate = [dictionary objectForKey:@"da"];
-    NSNumber *editDate = [dictionary objectForKey:@"dm"];
-    self.entryBodyTextView.text = [dictionary objectForKey:@"body"];
+    NSNumber *createDate = dictionary[@"da"];
+    NSNumber *editDate = dictionary[@"dm"];
+    self.entryBodyTextView.text = dictionary[@"body"];
     self.createDateLabel.text = [NSString stringWithFormat:@"Created at:\n%@",[self.dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:[createDate floatValue]]]];
     self.editDateLabel.text  =  [NSString stringWithFormat:@"Edited at:\n%@",[self.dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:[editDate floatValue]]]];
     if ([editDate floatValue] == [createDate floatValue])
